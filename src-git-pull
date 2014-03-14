@@ -4,7 +4,13 @@
 #
 # Author: Daniel Gonzalez Gasull
 
-import git
+try:
+    import git
+except:
+    import subprocess
+    has_git_lib = False
+else:
+    has_git_lib = True
 import os
 
 
@@ -14,7 +20,12 @@ for directory in os.listdir('.'):
         os.chdir(directory)
         for subdir in os.listdir('.'):
             if os.path.isdir(subdir):
-                repo = git.cmd.Git(subdir)
-                print('Updating %s/%s:' % (directory, repo.working_dir))
-                print(repo.pull())
+                print('Updating %s/%s:' % (directory, subdir))
+                if has_git_lib:
+                    repo = git.cmd.Git(subdir)
+                    print(repo.pull())
+                else:
+                    os.chdir(subdir)
+                    subprocess.call(['git', 'pull'])
+                    os.chdir('..')
         os.chdir('..')
