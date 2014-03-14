@@ -8,10 +8,20 @@ try:
     import git
 except:
     import subprocess
-    has_git_lib = False
+    HAS_GIT_LIB = False
 else:
-    has_git_lib = True
+    HAS_GIT_LIB = True
 import os
+
+
+def pull_repo(directory):
+    if HAS_GIT_LIB:
+        repo = git.cmd.Git(subdir)
+        print(repo.pull())
+    else:
+        os.chdir(subdir)
+        subprocess.call(['git', 'pull'])
+        os.chdir('..')
 
 
 os.chdir(os.path.expanduser('~/src/'))
@@ -21,11 +31,5 @@ for directory in os.listdir('.'):
         for subdir in os.listdir('.'):
             if os.path.isdir(subdir):
                 print('Updating %s/%s:' % (directory, subdir))
-                if has_git_lib:
-                    repo = git.cmd.Git(subdir)
-                    print(repo.pull())
-                else:
-                    os.chdir(subdir)
-                    subprocess.call(['git', 'pull'])
-                    os.chdir('..')
+                pull_repo(subdir)
         os.chdir('..')
