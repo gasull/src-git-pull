@@ -1,0 +1,20 @@
+#!/usr/bin/env python
+# src-git-pull
+# Updates ~/src/ from GitHub repos
+#
+# Author: Daniel Gonzalez Gasull
+
+import git
+import os
+
+
+os.chdir(os.path.expanduser('~/src/'))
+for directory in os.listdir('.'):
+    if os.path.isdir(directory) and directory.endswith('gasull.github.com'):
+        os.chdir(directory)
+        for subdir in os.listdir('.'):
+            if os.path.isdir(subdir):
+                repo = git.cmd.Git(subdir)
+                print('Updating %s/%s:' % (directory, repo.working_dir))
+                print(repo.pull())
+        os.chdir('..')
