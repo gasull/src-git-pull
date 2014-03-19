@@ -14,3 +14,7 @@ Then inside this folder I clone the remote git repository and also keep other
 relevant files that might be left out of the repo for any reason.
 
 The script is written with my ~/src/ folder structure in mind.
+
+To install create a link to the script somewhere in your path:
+
+    ln -s ~/src/src-git-pull.gasull.github.com/src-git-pull/src_git_pull.py ~/bin/src-git-pull
