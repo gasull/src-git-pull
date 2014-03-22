@@ -18,3 +18,16 @@ The script is written with my ~/src/ folder structure in mind.
 To install create a link to the script somewhere in your path:
 
     ln -s ~/src/src-git-pull.gasull.github.com/src-git-pull/src_git_pull.py ~/bin/src-git-pull
+
+To run the script in remote machines, install fabric if you don't have it
+already:
+
+    sudo aptitude install fabric
+
+then create a settings.py file:
+
+    ENV_HOSTS = ('foo.example.com', 'bar.example.org')
+
+then run
+
+    fab update_remotes
