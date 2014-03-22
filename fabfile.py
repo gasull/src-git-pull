@@ -4,16 +4,19 @@
 #
 # Author: Daniel Gonzalez Gasull
 
-from fabric.api import env
-from fabric.api import run
+from fabric import api as fab_api
+from fabric import exceptions as fab_ex
 
 import settings
 
 
-env.use_ssh_config = True
-env.hosts = settings.ENV_HOSTS
-env.warn_only = True
+fab_api.env.use_ssh_config = True
+fab_api.env.hosts = settings.ENV_HOSTS
+fab_api.env.warn_only = True
 
 
 def update_remotes():
-    run('~/bin/src-git-pull')
+    try:
+        fab_api.run('~/bin/src-git-pull')
+    except fab_ex.NetworkError as ex:
+        print(ex)
