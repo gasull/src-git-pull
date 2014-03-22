@@ -39,6 +39,7 @@ def pull_repo(directory):
     print('CWD: %s' % os.getcwd())
 
 
+# Update my projects at ~/src/*.gasull.github.com/*
 os.chdir(os.path.expanduser('~/src/'))
 print('CWD: %s' % os.getcwd())
 for directory in os.listdir('.'):
@@ -51,3 +52,9 @@ for directory in os.listdir('.'):
                 pull_repo(subdir)
         os.chdir('..')
         print('CWD: %s' % os.getcwd())
+
+# Update remote machines
+os.chdir(
+    os.path.expanduser('~/src/src-git-pull.gasull.github.com/src-git-pull')
+)
+subprocess.call(['fab', 'update_remotes'])
