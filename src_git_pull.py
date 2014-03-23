@@ -4,6 +4,7 @@
 #
 # Author: Daniel Gonzalez Gasull
 
+from distutils import spawn
 import os
 import subprocess
 
@@ -54,7 +55,15 @@ for directory in os.listdir('.'):
         print('CWD: %s' % os.getcwd())
 
 # Update remote machines
-os.chdir(
-    os.path.expanduser('~/src/src-git-pull.gasull.github.com/src-git-pull')
+srcgitpull_path = os.path.expanduser(
+    '~/src/src-git-pull.gasull.github.com/src-git-pull'
 )
-subprocess.call(['fab', 'update_remotes'])
+is_srcgitpull_present = os.path.isdir(srcgitpull_path)
+is_fab_present = spawn.find_executable('fab')
+if not is_srcgitpull_present:
+    print('%s not found' % srcgitpull_path)
+if not is_fab_present:
+    print('fab not found')
+if is_fab_present and is_srcgitpull_present:
+    os.chdir(srcgitpull_path)
+    subprocess.call(['fab', 'update_remotes'])
