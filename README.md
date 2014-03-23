@@ -24,12 +24,18 @@ ln -s ~/src/src-git-pull.gasull.github.com/src-git-pull/src_git_pull.py ~/bin/sr
 To run the script in remote machines, install fabric if you don't have it
 already:
 
-    sudo aptitude install fabric
+```bash
+sudo aptitude install fabric
+```
 
 then create a settings.py file:
 
-    ENV_HOSTS = ('foo.example.com', 'bar.example.org')
+```python
+ENV_HOSTS = ('foo.example.com', 'bar.example.org')
+```
 
 then run
 
-    fab update_remotes
+```bash
+fab update_remotes
+```
