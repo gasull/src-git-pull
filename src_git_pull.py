@@ -22,8 +22,10 @@ def git_up_repo(repo_dir):
     os.chdir(repo_dir)
     print('CWD: %s' % os.getcwd())
     git_up_1 = 'git remote update -p'
-    git_up_2 = 'git merge --ff-only @{u}'
+    print('Running %s' % git_up_1)
     subprocess.call(git_up_1.split(' '))
+    git_up_2 = 'git merge --ff-only @{u}'
+    print('Running %s' % git_up_2)
     subprocess.call(git_up_2.split(' '))
 
     for subpath in os.listdir('.'):
