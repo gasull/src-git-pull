@@ -22,6 +22,9 @@ fab_api.env.warn_only = True
 
 
 def update_remotes():
+    if not fab_api.env.hosts:
+        print('Empty tuple of remote hosts. Exiting...')
+        return
     try:
         fab_api.run('~/bin/src-git-pull')
     except fab_ex.NetworkError as ex:
